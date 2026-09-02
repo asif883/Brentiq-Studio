@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Camera, CircleUser, Menu, Send, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navigation = [
@@ -55,6 +55,62 @@ function ParticleSphere() {
   );
 }
 
+
+const LinkedInIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3C4.14 3 3.25 3.9 3.25 5s.89 2 2 2 2-.9 2-2-.9-2-2-2ZM20.75 13.41c0-3.46-1.85-5.07-4.32-5.07-1.99 0-2.88 1.09-3.38 1.85V8.5H9.67V20h3.38v-6.4c0-1.69.32-3.33 2.42-3.33 2.07 0 2.1 1.94 2.1 3.44V20h3.38l-.2-6.59Z" />
+  </svg>
+);
+
+const InstagramIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x="3"
+      y="3"
+      width="18"
+      height="18"
+      rx="5"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <circle
+      cx="12"
+      cy="12"
+      r="4"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M13.5 21v-8h2.75l.41-3.13H13.5V7.87c0-.91.25-1.53 1.56-1.53h1.67V3.54c-.29-.04-1.28-.13-2.43-.13-2.41 0-4.06 1.47-4.06 4.17v2.29H7.5V13h2.74v8h3.26Z" />
+  </svg>
+);
+
 export default function Banner() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -74,17 +130,25 @@ export default function Banner() {
           <Link className="ac-start-button" href="#contact"><span>Get Started</span><i><ArrowRight /></i></Link>
           <ParticleSphere />
           <div className="ac-hero-copy">
-            <p className="ac-kicker">Leading UI/UX Design Agency</p>
-            <h1 id="hero-heading">We <em>Design</em> Products That<br />Drive <em>Results</em></h1>
-            <p>We create thoughtful digital experiences that turn ambitious ideas into meaningful products.</p>
-            <Link className="ac-hero-button" href="#contact"><span>Book a Call</span><ArrowRight /></Link>
+            <p className="ac-kicker">Crafting Ideas. Creating Impact.</p>
+            <h1 id="hero-heading">We Build <em>Digital  Experiences</em> That Matter.</h1>
+            <p>We craft modern digital experiences that turn ideas into impact, helping brands connect, grow, and stand out in a digital world.</p>
+            <Link className="ac-hero-button" href="#contact"><span>Book a Call</span><i><ArrowRight /></i></Link>
           </div>
           <aside className="ac-contact-card" id="contact" aria-label="Contact details">
             <small>CONTACT US</small>
             <a className="ac-email" href="mailto:hello@brentiq.com">hello@brentiq.com</a>
-            <div className="ac-socials"><a href="#linkedin" aria-label="LinkedIn"><CircleUser /></a><a href="#telegram" aria-label="Telegram"><Send /></a><a href="#instagram" aria-label="Instagram"><Camera /></a></div>
+            <div className="ac-socials">
+                <a href="#linkedin" aria-label="LinkedIn"><LinkedInIcon /></a>
+                <a href="#facebook" aria-label="Facebook"><FacebookIcon /></a>
+                <a href="#instagram" aria-label="Instagram"><InstagramIcon /></a>
+            </div>
           </aside>
-          <div className="ac-stats"><div><strong>8+</strong><span>Countries<br />reached</span></div><div><strong>120+</strong><span>Products<br />launched</span></div><div><strong>4.9</strong><span>Average<br />rating</span></div></div>
+          <div className="ac-stats">
+            <div><strong>8+</strong><span>Countries<br />reached</span></div>
+            <div><strong>120+</strong><span>Products<br />launched</span></div>
+            <div><strong>4.9</strong><span>Average<br />rating</span></div>
+          </div>
         </div>
       </div>
       <div className="split-overlay" aria-hidden="true"><div className="split-panel top" /><div className="split-panel bottom" /><div className="split-logo">Brentiq<span>.</span></div></div>
@@ -219,7 +283,8 @@ export default function Banner() {
 
     .ac-nav-links a {
         color: #2d2458;
-        font-size: 15px;
+        font-size: 16px;
+        font-weight: 600;
         white-space: nowrap;
         transition: color 0.2s ease;
     }
@@ -240,12 +305,19 @@ export default function Banner() {
     .ac-start-button,
     .ac-hero-button {
         display: flex;
+        width: 146px;
+        height: 44px;
         align-items: center;
         justify-content: space-between;
+        padding: 0 5px 0 16px;
 
         border-radius: 999px;
-        background: linear-gradient(135deg, #7553c8, #5c3ba6);
-        color: #fff;
+        background: linear-gradient(135deg, #7553c8 0%, #5c3ba6 100%);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1;
+        text-decoration: none;
 
         box-shadow: 0 6px 20px rgba(47, 24, 112, 0.28);
     }
@@ -256,12 +328,6 @@ export default function Banner() {
         top: 16px;
         right: 25px;
 
-        width: 146px;
-        height: 44px;
-        padding: 0 5px 0 16px;
-
-        font-size: 13px;
-        font-weight: 600;
     }
 
     .ac-start-button i,
@@ -279,10 +345,16 @@ export default function Banner() {
         height: 32px;
     }
 
+    .ac-hero-button i {
+        width: 32px;
+        height: 32px;
+    }
+
     .ac-start-button svg,
     .ac-hero-button svg {
         width: 15px;
         height: 15px;
+        stroke-width: 1.6;
     }
 
 
@@ -326,7 +398,7 @@ export default function Banner() {
         left: 50%;
 
         display: flex;
-        width: min(760px, 80%);
+        width: min(860px, 80%);
         align-items: center;
         flex-direction: column;
 
@@ -337,9 +409,13 @@ export default function Banner() {
 
     .ac-kicker {
         margin: 0 0 28px;
-
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #7553c8, #5c3ba6);
+        color: #fff;
+        padding: 6px 18px;
+        box-shadow: 0 6px 20px rgba(47, 24, 112, 0.28);
     }
 
     .ac-hero-copy h1 {
@@ -366,13 +442,8 @@ export default function Banner() {
     }
 
     .ac-hero-button {
-        width: 158px;
-        height: 46px;
         margin-top: 28px;
-        padding: 0 18px 0 22px;
-
-        font-size: 13px;
-        font-weight: 700;
+        background: linear-gradient(135deg, #8d6be3 0%, #7553c8 100%);
     }
 
 
@@ -426,8 +497,8 @@ export default function Banner() {
 
     .ac-socials a {
         display: grid;
-        width: 29px;
-        height: 29px;
+        width: 31px;
+        height: 31px;
         place-items: center;
 
         border-radius: 50%;
@@ -597,6 +668,7 @@ export default function Banner() {
         .ac-particle-sphere svg {
         animation: none;
         }
+    }
 
 
 
@@ -715,6 +787,7 @@ export default function Banner() {
         right: -145px;
 
         width: 430px;
+        height: 430px;
         }
 
 
@@ -766,6 +839,112 @@ export default function Banner() {
 
         border-right: 0;
         border-radius: 22px 22px 0 0;
+        }
+    }
+
+    @media (max-width: 1024px) and (min-width: 768px) {
+        .ac-hero-stage {
+        padding: 12px;
+        }
+
+        .ac-nav-shell {
+        width: 62%;
+        }
+
+        .ac-nav-links {
+        width: 88%;
+        gap: 12px;
+        }
+
+        .ac-nav-links a {
+        font-size: 14px;
+        }
+
+        .ac-particle-sphere {
+        top: 72px;
+        right: 5%;
+        width: min(48vw, 460px);
+        height: min(48vw, 460px);
+        }
+
+        .ac-hero-copy {
+        top: 24%;
+        width: min(720px, 86%);
+        }
+
+        .ac-hero-copy h1 {
+        font-size: clamp(42px, 6vw, 60px);
+        }
+
+        .ac-contact-card {
+        width: 32%;
+        padding-right: 24px;
+        padding-left: 24px;
+        }
+
+        .ac-stats {
+        right: 6%;
+        width: 54%;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .ac-hero-section {
+        min-height: 720px;
+        }
+
+        .ac-hero-card {
+        min-height: 700px;
+        }
+
+        .ac-brand {
+        top: 20px;
+        left: 18px;
+        font-size: 18px;
+        }
+
+        .ac-hero-copy {
+        top: 23%;
+        width: calc(100% - 24px);
+        }
+
+        .ac-hero-copy h1 {
+        font-size: clamp(28px, 8.4vw, 36px);
+        line-height: 1.12;
+        letter-spacing: -1px;
+        }
+
+        .ac-hero-copy > p:not(.ac-kicker) {
+        max-width: 255px;
+        margin-top: 18px;
+        font-size: 11px;
+        }
+
+        .ac-hero-button {
+        margin-top: 22px;
+        }
+
+        .ac-stats {
+        bottom: 184px;
+        }
+
+        .ac-stats strong {
+        font-size: 23px;
+        }
+
+        .ac-stats span {
+        margin-top: 8px;
+        font-size: 9px;
+        }
+
+        .ac-contact-card {
+        height: 154px;
+        padding: 23px 20px;
+        }
+
+        .ac-email {
+        margin-top: 12px;
+        font-size: 16px;
         }
     }
     `}</style>
