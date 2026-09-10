@@ -5,6 +5,7 @@ import ProjectShowcase from "@/Components/HomePageSections/ProjectShowcase";
 import HowWeWork from "@/Components/HomePageSections/HowWeWork";
 import Testimonials from "@/Components/HomePageSections/Testimonials";
 import FAQ from "@/Components/HomePageSections/FAQ";
+import ContactCTA from "@/Components/HomePageSections/ContactCTA";
 
 export default function Home() {
   return (
@@ -16,9 +17,11 @@ export default function Home() {
       <HowWeWork />
       <Testimonials />
       <FAQ />
+      <ContactCTA />
     </>
   );
 }
+
 
 
 
