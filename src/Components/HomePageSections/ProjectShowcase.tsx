@@ -3,14 +3,14 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface ProjectItem {
   id: string;
   title: string;
-  category: string;
+  tags: string[];
   image: string;
   liveUrl: string;
   githubUrl: string;
@@ -20,7 +20,7 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: "01",
     title: "Relax Studio",
-    category: "Brand & Spatial Experience",
+    tags: ["Website", "UI/UX"],
     image:
       "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
     liveUrl: "https://relax-studio.example.com",
@@ -29,7 +29,7 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: "02",
     title: "Aura Acoustics",
-    category: "Physical & Digital Identity",
+    tags: ["Videography", "Branding"],
     image:
       "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1600&auto=format&fit=crop",
     liveUrl: "https://aura-acoustics.example.com",
@@ -37,8 +37,8 @@ const PROJECTS_DATA: ProjectItem[] = [
   },
   {
     id: "03",
-    title: "Horizon Studio",
-    category: "3D Digital Experience",
+    title: "Horizon Enterprise",
+    tags: ["ERP", "Website"],
     image:
       "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop",
     liveUrl: "https://horizon-studio.example.com",
@@ -47,7 +47,7 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: "04",
     title: "Vortex Motion",
-    category: "Creative Direction",
+    tags: ["UI/UX", "Videography"],
     image:
       "https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=1600&auto=format&fit=crop",
     liveUrl: "https://vortex-motion.example.com",
@@ -76,16 +76,14 @@ export default function ProjectShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-  const buttonsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
     const cards = cardRefs.current.filter(Boolean);
-    const titles = titleRefs.current.filter(Boolean);
-    const buttons = buttonsRefs.current.filter(Boolean);
+    const contents = contentRefs.current.filter(Boolean);
 
     if (!section || cards.length === 0) return;
 
@@ -100,8 +98,7 @@ export default function ProjectShowcase() {
             zIndex: 10,
             force3D: true,
           });
-          if (titles[0]) gsap.set(titles[0], { opacity: 1, y: 0 });
-          if (buttons[0]) gsap.set(buttons[0], { opacity: 1, y: 0 });
+          if (contents[0]) gsap.set(contents[0], { opacity: 1, y: 0 });
         } else {
           gsap.set(card, {
             y: "140%",
@@ -110,8 +107,7 @@ export default function ProjectShowcase() {
             zIndex: 10 + index,
             force3D: true,
           });
-          if (titles[index]) gsap.set(titles[index], { opacity: 0, y: 20 });
-          if (buttons[index]) gsap.set(buttons[index], { opacity: 0, y: 12 });
+          if (contents[index]) gsap.set(contents[index], { opacity: 0, y: 24 });
         }
       });
 
@@ -135,8 +131,7 @@ export default function ProjectShowcase() {
       for (let i = 1; i < cards.length; i++) {
         const prevCard = cards[i - 1];
         const currentCard = cards[i];
-        const currentTitle = titles[i];
-        const currentButtons = buttons[i];
+        const currentContent = contents[i];
 
         const stepLabel = `flow-step-${i}`;
 
@@ -174,30 +169,17 @@ export default function ProjectShowcase() {
           stepLabel
         );
 
-        // 3. Smooth reveal for project title and action buttons as card settles
-        if (currentTitle) {
+        // 3. Smooth reveal for project title, tags, and action buttons as card settles
+        if (currentContent) {
           tl.to(
-            currentTitle,
+            currentContent,
             {
               opacity: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.45,
               ease: "power2.out",
             },
             `${stepLabel}+=0.5`
-          );
-        }
-
-        if (currentButtons) {
-          tl.to(
-            currentButtons,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.4,
-              ease: "power2.out",
-            },
-            `${stepLabel}+=0.6`
           );
         }
 
@@ -217,99 +199,119 @@ export default function ProjectShowcase() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="works"
-      className="relative w-full h-screen bg-white text-black px-4 sm:px-8 lg:px-12 py-6 flex flex-col justify-between overflow-hidden isolate"
-    >
-      {/* Top Header: "Projects" + "Our Works" badge with glowing orange dot */}
-      <div className="w-full max-w-[1440px] mx-auto flex items-center justify-between pt-2 pb-4 border-b border-gray-100 shrink-0">
-        <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-none">
-          Projects
-        </h2>
-
-        <div className="inline-flex items-center gap-2.5">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5520] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF5520] shadow-[0_0_8px_#FF5520]" />
-          </span>
-          <span className="text-xs sm:text-sm font-semibold tracking-wide text-gray-900 font-body">
-            Our Works
-          </span>
-        </div>
-      </div>
-
-      {/* Center Stage: Wide Pinned Project Cards Container */}
-      <div
-        ref={cardsContainerRef}
-        className="relative w-full flex-1 flex items-center justify-center overflow-hidden my-auto"
+    <>
+      <section
+        ref={sectionRef}
+        id="works"
+        className="relative w-full h-screen bg-white text-black px-4 sm:px-8 lg:px-12 py-6 flex flex-col justify-between overflow-hidden isolate"
       >
-        {PROJECTS_DATA.map((project, index) => (
-          <div
-            key={project.id}
-            ref={(el) => {
-              cardRefs.current[index] = el;
-            }}
-            className="absolute w-[86vw] max-w-[1440px] h-[58vh] sm:h-[66vh] max-h-[720px] min-h-[440px] rounded-[26px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-gray-200/80 bg-[#e8e9eb] will-change-transform flex flex-col justify-end p-6 sm:p-10 lg:p-12 isolate"
-          >
-            {/* Project Image */}
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              sizes="(max-width: 1440px) 90vw, 1440px"
-              priority={index === 0}
-              className="object-cover object-center -z-20"
-            />
+        {/* Top Header: "Projects" + "Our Works" badge with glowing orange dot */}
+        <div className="w-full max-w-[1440px] mx-auto flex items-center justify-between pt-2 pb-4 border-b border-gray-100 shrink-0">
+          <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-none">
+            Projects
+          </h2>
 
-            {/* Subtle Vignette Layer for Typography Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent -z-10 pointer-events-none" />
+          <div className="inline-flex items-center gap-2.5">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5520] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF5520] shadow-[0_0_8px_#FF5520]" />
+            </span>
+            <span className="text-xs sm:text-sm font-semibold tracking-wide text-gray-900 font-body">
+              Our Works
+            </span>
+          </div>
+        </div>
 
-            {/* Bottom-Left: Large Premium Project Title + Minimal Icon Buttons */}
-            <div className="z-10 flex flex-col items-start gap-4 sm:gap-5 max-w-2xl">
-              {/* Large Project Heading */}
-              <h3
-                ref={(el) => {
-                  titleRefs.current[index] = el;
-                }}
-                className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight drop-shadow-md will-change-transform"
-              >
-                {project.title}
-              </h3>
+        {/* Center Stage: Wide Pinned Project Cards Container */}
+        <div
+          ref={cardsContainerRef}
+          className="relative w-full flex-1 flex items-center justify-center overflow-hidden my-auto"
+        >
+          {PROJECTS_DATA.map((project, index) => (
+            <div
+              key={project.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              className="absolute w-[86vw] max-w-[1440px] h-[58vh] sm:h-[66vh] max-h-[720px] min-h-[440px] rounded-[26px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-gray-200/80 bg-[#e8e9eb] will-change-transform flex flex-col justify-end p-6 sm:p-10 lg:p-12 isolate"
+            >
+              {/* Project Image */}
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 1440px) 90vw, 1440px"
+                priority={index === 0}
+                className="object-cover object-center -z-20"
+              />
 
-              {/* Action Buttons: Live & GitHub (Icons ONLY) */}
+              {/* Subtle Vignette Layer for Typography Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent -z-10 pointer-events-none" />
+
+              {/* Bottom-Left: Tags + Project Title + Minimal Icon Buttons */}
               <div
                 ref={(el) => {
-                  buttonsRefs.current[index] = el;
+                  contentRefs.current[index] = el;
                 }}
-                className="flex items-center gap-3 will-change-transform"
+                className="z-10 flex flex-col items-start gap-3 sm:gap-4 max-w-2xl will-change-transform"
               >
-                {/* Live Website Button */}
-                <Link
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="View live website"
-                  className="group/btn inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/25 bg-black/40 backdrop-blur-md text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shrink-0"
-                >
-                  <ArrowUpRight className="w-5 h-5 stroke-[2] transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                </Link>
+                {/* Category / Service Tags (Website, UI/UX, ERP, Videography) */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-body text-[11px] sm:text-xs font-semibold text-white/95 bg-black/45 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/20 uppercase tracking-wider shadow-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-                {/* GitHub Repository Button */}
-                <Link
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="View GitHub repository"
-                  className="group/btn inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/25 bg-black/40 backdrop-blur-md text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shrink-0"
-                >
-                  <GithubIcon className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-110" />
-                </Link>
+                {/* Large Project Heading */}
+                <h3 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight drop-shadow-md">
+                  {project.title}
+                </h3>
+
+                {/* Action Buttons: Live & GitHub (Icons ONLY) */}
+                <div className="flex items-center gap-3 pt-1">
+                  {/* Live Website Button */}
+                  <Link
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View live website"
+                    className="group/btn inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/25 bg-black/40 backdrop-blur-md text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shrink-0"
+                  >
+                    <ArrowUpRight className="w-5 h-5 stroke-[2] transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </Link>
+
+                  {/* GitHub Repository Button */}
+                  <Link
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View GitHub repository"
+                    className="group/btn inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/25 bg-black/40 backdrop-blur-md text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shrink-0"
+                  >
+                    <GithubIcon className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-110" />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </section>
+
+      {/* Static See More Button Section */}
+      <div className="w-full bg-white pt-6 pb-12 sm:py-16 flex items-center justify-center">
+        <Link
+          href="#contact"
+          className="font-button inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] hover:bg-black text-white text-sm sm:text-base font-semibold tracking-tight transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 group"
+        >
+          <span>See More Projects</span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
       </div>
-    </section>
+    </>
   );
 }
