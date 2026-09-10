@@ -13,7 +13,7 @@ const SERVICES_LIST = [
 export default function Banner() {
   return (
     <section className="w-full px-3 sm:px-5 lg:px-6 pb-4 sm:pb-6">
-      {/* Main Full-Screen Video Hero Card with small outer gap */}
+      {/* Main Full-Screen Video Hero Card */}
       <div className="relative w-full h-[calc(100dvh-92px)] min-h-[660px] rounded-[24px] sm:rounded-[36px] overflow-hidden shadow-2xl flex flex-col justify-between p-6 sm:p-10 lg:p-12 text-white isolate bg-black">
         
         {/* Background Video */}

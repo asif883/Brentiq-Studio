@@ -190,7 +190,7 @@ export default function HowWeWork() {
         }}
       >
         {/* Container */}
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full mx-auto">
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-16 sm:pb-24 border-b border-white/10 gap-6">
           <div>

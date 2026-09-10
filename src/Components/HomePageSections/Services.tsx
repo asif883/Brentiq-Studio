@@ -163,7 +163,7 @@ export default function Services() {
           className="pointer-events-none absolute top-0 left-0 -ml-3 -mt-3 w-6 h-6 rounded-full bg-[#FF5520] blur-[6px] opacity-0 lg:opacity-75 transition-opacity duration-300 z-30"
         />
 
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full mx-auto">
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-10 sm:pb-14 border-b border-white/10 gap-6 mb-8 sm:mb-12">
             <div>

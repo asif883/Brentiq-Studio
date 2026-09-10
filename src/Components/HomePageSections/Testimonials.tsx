@@ -226,7 +226,7 @@ export default function Testimonials() {
         className="relative w-full rounded-[24px] sm:rounded-[36px] bg-[#ebeeed] border border-zinc-200/80 pt-8 sm:pt-12 pb-8 sm:pb-12 overflow-hidden shadow-sm"
       >
         {/* Top Header: Badge, Heading & Supporting Description */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-8 sm:pb-12 mb-6 sm:mb-8 border-b border-zinc-300/70">
+        <div className="w-full mx-auto px-6 sm:px-10 lg:px-14 pb-8 sm:pb-12 mb-6 sm:mb-8 border-b border-zinc-300/70">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2.5 mb-3.5">
@@ -312,7 +312,7 @@ export default function Testimonials() {
         </div>
 
         {/* Bottom Controls: Progress Bar + Arrow Navigation Buttons */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-8 sm:pt-10 flex items-center justify-between gap-6">
+        <div className="w-full mx-auto px-6 sm:px-10 lg:px-14 pt-8 sm:pt-10 flex items-center justify-between gap-6">
           {/* Progress Bar */}
           <div className="relative h-[2.5px] w-40 sm:w-64 md:w-80 lg:w-96 bg-zinc-300/80 rounded-full overflow-hidden">
             <div
