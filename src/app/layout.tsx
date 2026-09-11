@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/Components/SharedSections/Navbar";
@@ -20,6 +21,14 @@ export default function RootLayout({
       data-theme="light"
       className="h-full antialiased"
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Stack+Sans+Notch:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="font-body min-h-screen flex flex-col">
         <SmoothScroll />
         <Navbar />
